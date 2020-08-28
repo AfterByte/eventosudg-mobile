@@ -9,29 +9,18 @@
  */
 
 import React from 'react';
-// Import external components
-import LoginView from './src/views/LoginView'
-//import React-native components
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-} from 'react-native';
+// Custom components
+import AuthProvider from './src/components/AuthProvider';
+import Routes from './src/components/Routes';
 
-declare const global: {HermesInternal: null | {}};
+declare const global: { HermesInternal: null | {} };
 
 const App = () => {
   return (
-    <>
-      <LoginView/>      
-    </>
+    <AuthProvider>
+      <Routes />
+    </AuthProvider>
   );
 };
-
-const styles = StyleSheet.create({
-});
 
 export default App;
