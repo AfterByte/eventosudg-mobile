@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 // Authorization
 import { AuthContext, AuthProviderPayload } from './AuthProvider';
 // ReactNative components
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 // React navigation components
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';

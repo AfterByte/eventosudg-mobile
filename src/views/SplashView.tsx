@@ -1,26 +1,21 @@
 import React from 'react';
-//Import external components
+import { View, Text, SafeAreaView, ActivityIndicator } from 'react-native';
+// Custom component imports
 import WavyHeader from '../components/WavyHeader';
-import Login from '../components/Login';
-//import React-native components
-import { View, SafeAreaView } from 'react-native';
-// Import styles
+// Styles imports
 import styles from '../assets/styles/styles';
-// import vectors/images
-import NoteListGreen from '../assets/svg/undraw_Note_list_re_r4u9_Green.svg';
+// Vectors imports
 import UdGLogo from '../assets/svg/Escudo_UdeG.svg';
+import Calendar from '../assets/svg/undraw_events_2p66_Green.svg';
 
-export default function LoginView() {
+type SplashViewProps = {
+  loading?: boolean;
+};
+
+const SplashView = ({ loading }: SplashViewProps) => {
   return (
     <SafeAreaView style={styles.container}>
       {/* Background vector image */}
-      <NoteListGreen height={350} width={350} style={styles.bgImg} />
-      {/* Wave decoration component, to add a new one, you require to pass the next props:
-      - a style class 
-      - a background color
-      - a custom height value (how big it's gonna be)
-      - a custon top value (for position it)
-      - the wave patter to draw (go to https://getwaves.io , generate a wave and on the download button just copy the "d=" values of the <path> tag) */}
       <WavyHeader
         customStyles={styles.svgCurve}
         customBgColor={'#779BE7'}
@@ -32,8 +27,10 @@ export default function LoginView() {
       />
       {/* UdG Logo Vector */}
       <UdGLogo style={styles.UdGLogo} />
-      <View style={styles.loginContainer}>
-        <Login />
+      <View style={styles.logo}>
+        <Text style={styles.logoText}>Eventos UDG</Text>
+        <Calendar height={'300px'} width={'300px'} />
+        {loading ? <ActivityIndicator size="large" color="#445068" /> : null}
       </View>
       <WavyHeader
         customStyles={styles.wavyFooter}
@@ -46,4 +43,6 @@ export default function LoginView() {
       />
     </SafeAreaView>
   );
-}
+};
+
+export default SplashView;

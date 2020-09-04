@@ -1,9 +1,10 @@
-import React, {createContext, ReactNode, useReducer, useEffect} from 'react';
+import React, { createContext, ReactNode, useReducer, useEffect } from 'react';
 // Helper imports
 import EventosudgApiClient, {
   UserCredentials,
   ClientResponse,
 } from '../helpers/apiClient';
+import SplashView from '../views/SplashView';
 
 export const AuthContext = createContext({});
 const apiClient = new EventosudgApiClient('http://afterbyte.wtf:3000/');
@@ -29,7 +30,7 @@ export type AuthProviderPayload = {
   signout(): Promise<void>;
 };
 
-const AuthProvider = ({children}: AuthProviderProps) => {
+const AuthProvider = ({ children }: AuthProviderProps) => {
   function reducer(prevState: AuthProviderState | any, action: DispatchValue) {
     switch (action.type) {
       case 'restoreToken':
@@ -63,7 +64,7 @@ const AuthProvider = ({children}: AuthProviderProps) => {
     const refresh = async () => {
       try {
         await apiClient.refreshToken();
-        dispatch({type: 'restoreToken'});
+        dispatch({ type: 'restoreToken' });
       } catch (error) {
         console.log(error);
       }
@@ -76,14 +77,16 @@ const AuthProvider = ({children}: AuthProviderProps) => {
     apiClient: apiClient,
     signin: async (user: UserCredentials) => {
       const response = await apiClient.signIn(user);
-      dispatch({type: 'signIn', token: apiClient.tokenLoaded});
+      dispatch({ type: 'signIn', token: apiClient.tokenLoaded });
       return response;
     },
     signout: async () => {
       await apiClient.signOut();
-      dispatch({type: 'signOut'});
+      dispatch({ type: 'signOut' });
     },
   };
+
+  if (state.isLoading) return <SplashView loading={true} />;
   return (
     <AuthContext.Provider value={providerPayload}>
       {children}
