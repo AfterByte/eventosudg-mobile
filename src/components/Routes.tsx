@@ -1,20 +1,17 @@
 import React, { useContext } from 'react';
 // Authorization
 import { AuthContext, AuthProviderPayload } from './AuthProvider';
-// ReactNative components
-import { View } from 'react-native';
+// Custom components
+import CustomDrawer from './CustomDrawer';
 // React navigation components
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import {
-  createDrawerNavigator,
-  DrawerContentScrollView,
-  DrawerItemList,
-  DrawerItem,
-} from '@react-navigation/drawer';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 // Views imports
 import LoginView from '../views/LoginView';
 import UpcomingEventsView from '../views/UpcomingEventsView';
+import SampleView from '../views/SampleView';
 
 const Stack = createStackNavigator();
 const AuthNavigator = () => {
@@ -31,34 +28,10 @@ const AuthNavigator = () => {
 
 const Drawer = createDrawerNavigator();
 const AppNavigator = () => {
-  const { signout } = useContext(AuthContext) as AuthProviderPayload;
-
-  const signOut = async () => {
-    try {
-      await signout();
-    } catch (error) {
-      console.warn(error);
-    }
-  };
   return (
-    <Drawer.Navigator
-      drawerContent={(props) => {
-        return (
-          <DrawerContentScrollView
-            contentContainerStyle={{ flex: 1, paddingVertical: 0 }}
-            {...props}>
-            <View style={{ flex: 1, flexDirection: 'column' }}>
-              <DrawerItemList style={{ flex: 2 }} {...props} />
-              <DrawerItem
-                style={{ marginTop: 'auto' }}
-                label="Log out"
-                onPress={signOut}
-              />
-            </View>
-          </DrawerContentScrollView>
-        );
-      }}>
+    <Drawer.Navigator drawerContent={(props) => <CustomDrawer {...props} />}>
       <Drawer.Screen name="Home" component={UpcomingEventsView} />
+      <Drawer.Screen name="Sample" component={SampleView} />
     </Drawer.Navigator>
   );
 };

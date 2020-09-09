@@ -13,6 +13,10 @@ import React, { useState, useMemo } from 'react';
 import AuthProvider from './src/components/AuthProvider';
 import Routes from './src/components/Routes';
 import SplashView from './src/views/SplashView';
+// Config
+import moment from 'moment';
+import 'moment/locale/es-us';
+moment.locale('es');
 
 declare const global: { HermesInternal: null | {} };
 

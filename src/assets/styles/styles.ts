@@ -5,8 +5,12 @@ export const styles = StyleSheet.create({
     top: '4%',
     left: '85%',
   },
+  body: {
+    backgroundColor: 'white',
+  },
   container: {
     flex: 1,
+    flexDirection: 'column',
   },
   svgCurve: {
     position: 'absolute',
@@ -37,6 +41,10 @@ export const styles = StyleSheet.create({
   logoText: {
     color: '#445068',
     fontSize: 42,
+  },
+  debug: {
+    borderColor: 'red',
+    borderWidth: 1,
   },
 });
 
