@@ -85,4 +85,14 @@ export const events: Event[] = [
     date: moment('20201031', 'YYYYMMDD').toDate(),
     maxCapacity: 31,
   },
+  {
+    id: 2,
+    name: 'Evento 2',
+    capacity: 20,
+    description: 'an Empty event',
+    organizer: 'Dios',
+    status: 'Disponible',
+    date: moment('20201031', 'YYYYMMDD').toDate(),
+    maxCapacity: 31,
+  },
 ];

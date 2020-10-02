@@ -1,4 +1,11 @@
-import React, { createContext, ReactNode, useReducer, useEffect } from 'react';
+import React, {
+  createContext,
+  ReactNode,
+  useReducer,
+  useEffect,
+  useState,
+  useRef,
+} from 'react';
 // Helper imports
 import EventosudgApiClient, {
   UserCredentials,
@@ -54,12 +61,15 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     }
   }
 
+  const [splashTimedOut, setSplashTimedOut] = useState(false);
+
   const [state, dispatch] = useReducer(reducer, {
     isLoading: true,
     isSignout: false,
     tokenAvailable: false,
   }) as [AuthProviderState, React.Dispatch<DispatchValue>];
 
+  const update = useRef(true);
   useEffect(() => {
     const refresh = async () => {
       try {
@@ -69,6 +79,11 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
         console.log(error);
       }
     };
+
+    if (update.current) {
+      setTimeout(() => setSplashTimedOut(true), 3 * 1000);
+      update.current = false;
+    }
 
     if (state.isLoading) refresh();
   });
@@ -86,7 +101,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     },
   };
 
-  if (state.isLoading) return <SplashView loading={true} />;
+  if (state.isLoading || !splashTimedOut) return <SplashView loading={true} />;
   return (
     <AuthContext.Provider value={providerPayload}>
       {children}

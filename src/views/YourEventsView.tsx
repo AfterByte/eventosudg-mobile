@@ -2,46 +2,34 @@ import React from 'react';
 import { View, FlatList, StyleSheet, SafeAreaView, Text } from 'react-native';
 // Custom component imports
 import Header from '../components/Header';
-import CategoryCard from '../components/CategoryCard';
 import EventCard from '../components/EventCard';
-// Styles imports
+import Filter from '../components/Filter';
+import NothingHere from '../components/NothingHere';
+// Styles
 import generalStyles from '../assets/styles/styles';
 // Mock data
-import { categories, events } from '../helpers/mockdata';
+import { events } from '../helpers/mockdata';
 
-const ComposedHeader = () => {
-  return (
-    <View>
-      <Text style={styles.text}>Categorías</Text>
-      <FlatList
-        style={styles.categories}
-        data={categories}
-        numColumns={2}
-        renderItem={({ item }) => (
-          <CategoryCard name={item.name} image={item.image} />
-        )}
-        keyExtractor={(_, index) => index.toString()}
-      />
-      <Text style={styles.text}>Eventos</Text>
-    </View>
-  );
-};
-
-const UpcomingEventsView = () => {
-  return (
+const YourEventsView = () => {
+  return events.length > 0 ? (
     <SafeAreaView style={[generalStyles.container]}>
-      <Header title={'Próximos eventos'} />
+      <Header title="Tus eventos" />
+      <Filter />
       <FlatList
         data={events}
-        ListHeaderComponent={ComposedHeader}
         renderItem={({ item }) => <EventCard event={item} />}
         keyExtractor={(_, index) => index.toString()}
       />
     </SafeAreaView>
+  ) : (
+    <SafeAreaView style={generalStyles.container}>
+      <Header title="Tus eventos" />
+      <NothingHere message="Para crear un evento dirígite a la aplicación web." />
+    </SafeAreaView>
   );
 };
 
-export default UpcomingEventsView;
+export default YourEventsView;
 
 const styles = StyleSheet.create({
   categories: {

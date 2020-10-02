@@ -15,7 +15,7 @@ const appendToken = (headers: Headers, token: string) =>
 const detachToken = (response: Response) => {
   const bearer = response.headers.get('Authorization');
   if (bearer) {
-    return bearer.split('')[1];
+    return bearer.split(' ')[1];
   } else {
     return '';
   }
@@ -35,8 +35,8 @@ const detachBody = async (response: Response) => {
 };
 
 // Payload types
-export type UserCredentials = {code: number; password: string};
-export type ClientResponse = {body: any; status: number};
+export type UserCredentials = { code: number; password: string };
+export type ClientResponse<T = any> = { body: T; status: number };
 
 export default class EventosudgApiClient {
   private token: string;
@@ -68,7 +68,7 @@ export default class EventosudgApiClient {
         headers: this.headers as any,
       });
       const json = await detachBody(response);
-      return {body: json, status: response.status} as ClientResponse;
+      return { body: json, status: response.status } as ClientResponse;
     } catch (error) {
       throw new Error(
         'There was a problem while fetching the remote resource!',
@@ -106,7 +106,7 @@ export default class EventosudgApiClient {
       }
     }
 
-    return {status: 401, body: {}} as ClientResponse;
+    return { status: 401, body: {} } as ClientResponse;
   }
 
   // user params: email, password
@@ -118,11 +118,11 @@ export default class EventosudgApiClient {
         headers: this.headers as any,
         body: JSON.stringify(user),
       });
-      // If the users signs in successfully save token in storage
-      // Otherwise the server would repond 401 if the token is no longer valid
     } catch (error) {
       throw new Error('There was a problem while fetching the remote source!');
     }
+    // If the users signs in successfully save token in storage
+    // Otherwise the server would respond 401 if the token is no longer valid
     if (response.status < 300) {
       this.token = detachToken(response);
       try {
@@ -134,7 +134,7 @@ export default class EventosudgApiClient {
       }
     }
     const json = await detachBody(response);
-    return {body: json, status: response.status} as ClientResponse;
+    return { body: json, status: response.status } as ClientResponse;
   }
 
   async signOut() {
@@ -158,6 +158,6 @@ export default class EventosudgApiClient {
       }
     }
 
-    return {body: json, status: response.status} as ClientResponse;
+    return { body: json, status: response.status } as ClientResponse;
   }
 }

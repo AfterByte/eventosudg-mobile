@@ -21,18 +21,10 @@ moment.locale('es');
 declare const global: { HermesInternal: null | {} };
 
 const App = () => {
-  const [splashTimedOut, setSplashTimedOut] = useState(false);
-
-  useMemo(() => {
-    setTimeout(() => setSplashTimedOut(true), 3 * 1000);
-  }, [splashTimedOut]);
-
-  return splashTimedOut ? (
+  return (
     <AuthProvider>
       <Routes />
     </AuthProvider>
-  ) : (
-    <SplashView loading={true} />
   );
 };
 
