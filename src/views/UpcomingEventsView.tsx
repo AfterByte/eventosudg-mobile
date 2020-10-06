@@ -30,11 +30,11 @@ const ComposedHeader = () => {
 const UpcomingEventsView = () => {
   return (
     <SafeAreaView style={[generalStyles.container]}>
-      <Header title={'Próximos eventos'} />
+      <Header title={'Próximos eventos'} isSubPage={false}/>
       <FlatList
         data={events}
         ListHeaderComponent={ComposedHeader}
-        renderItem={({ item }) => <EventCard event={item} />}
+        renderItem={({ item }) => <EventCard event={item}/>}
         keyExtractor={(_, index) => index.toString()}
       />
     </SafeAreaView>

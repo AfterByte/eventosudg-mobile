@@ -14,21 +14,35 @@ import LoginView from '../views/LoginView';
 import UpcomingEventsView from '../views/UpcomingEventsView';
 import SampleView from '../views/SampleView';
 import YourEventsView from '../views/YourEventsView';
+import EventDetails from '../views/EventDetails';
 
 const Stack = createStackNavigator();
 const AuthNavigator = () => {
   return (
-    <Stack.Navigator
-      initialRouteName="SignIn"
-      screenOptions={{
-        headerShown: false,
-      }}>
-      <Stack.Screen name="SignIn" component={LoginView} />
-    </Stack.Navigator>
+    <NavigationContainer>
+      <Stack.Navigator
+        initialRouteName="SignIn"
+        screenOptions={{
+          headerShown: false,
+        }}>
+        <Stack.Screen name="SignIn" component={LoginView} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };
 
 const Drawer = createDrawerNavigator();
+/*const AppNavigator = () => {
+  return (
+    <Drawer.Navigator drawerContent={(props) => <CustomDrawer {...props} />}>
+      <Drawer.Screen name="Home" component={UpcomingEventsView} />
+      <Drawer.Screen name="Sample" component={SampleView} />
+      <Drawer.Screen name="EventDetails" component={EventDetails} />
+    </Drawer.Navigator>
+  );
+};*/
+
+const EventStack = createStackNavigator();
 const AppNavigator = () => {
   return (
     <Drawer.Navigator drawerContent={(props) => <CustomDrawer {...props} />}>
@@ -68,6 +82,10 @@ const AppNavigator = () => {
         options={{
           title: 'Ejemplo',
         }}
+      />
+      <Drawer.Screen
+        name="EventDetails"
+        component={EventDetails}
       />
     </Drawer.Navigator>
   );
