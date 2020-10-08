@@ -8,13 +8,15 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 // Assets
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import FeatherIcon from 'react-native-vector-icons/Feather';
 // Views imports
 import LoginView from '../views/LoginView';
 import UpcomingEventsView from '../views/UpcomingEventsView';
 import SampleView from '../views/SampleView';
 import YourEventsView from '../views/YourEventsView';
 import EventDetails from '../views/EventDetails';
+import SearchView from '../views/SearchView';
 
 const Stack = createStackNavigator();
 const AuthNavigator = () => {
@@ -32,17 +34,6 @@ const AuthNavigator = () => {
 };
 
 const Drawer = createDrawerNavigator();
-/*const AppNavigator = () => {
-  return (
-    <Drawer.Navigator drawerContent={(props) => <CustomDrawer {...props} />}>
-      <Drawer.Screen name="Home" component={UpcomingEventsView} />
-      <Drawer.Screen name="Sample" component={SampleView} />
-      <Drawer.Screen name="EventDetails" component={EventDetails} />
-    </Drawer.Navigator>
-  );
-};*/
-
-const EventStack = createStackNavigator();
 const AppNavigator = () => {
   return (
     <Drawer.Navigator drawerContent={(props) => <CustomDrawer {...props} />}>
@@ -52,12 +43,7 @@ const AppNavigator = () => {
         options={{
           title: 'Inicio',
           drawerIcon: () => (
-            <Icon
-              style={{ alignSelf: 'flex-end' }}
-              name="home-outline"
-              size={20}
-              color={'#445068'}
-            />
+            <MaterialIcon name="home-outline" size={20} color={'#445068'} />
           ),
         }}
       />
@@ -67,12 +53,17 @@ const AppNavigator = () => {
         options={{
           title: 'Tus eventos',
           drawerIcon: () => (
-            <Icon
-              style={{ alignSelf: 'flex-end' }}
-              name="home-outline"
-              size={20}
-              color={'#445068'}
-            />
+            <MaterialIcon name="calendar-today" size={20} color={'#445068'} />
+          ),
+        }}
+      />
+      <Drawer.Screen
+        name="search"
+        component={SearchView}
+        options={{
+          title: 'Buscar eventos',
+          drawerIcon: () => (
+            <FeatherIcon name="search" size={20} color={'#445068'} />
           ),
         }}
       />
@@ -83,10 +74,7 @@ const AppNavigator = () => {
           title: 'Ejemplo',
         }}
       />
-      <Drawer.Screen
-        name="EventDetails"
-        component={EventDetails}
-      />
+      <Drawer.Screen name="EventDetails" component={EventDetails} />
     </Drawer.Navigator>
   );
 };

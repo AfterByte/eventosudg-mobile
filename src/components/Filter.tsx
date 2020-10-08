@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, FlatList } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import {
+  StyleSheet,
+  Text,
+  View,
+  FlatList,
+  TouchableOpacity,
+  SafeAreaView,
+} from 'react-native';
 // Custom component imports
 import { Card } from './Elements';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -53,10 +59,11 @@ const Filters = ({
         data={filterCategories}
         numColumns={filterCategories.length}
         renderItem={({ item }) => (
-          <View style={styles.category}>
+          <SafeAreaView style={styles.category}>
             <Text style={styles.filterTitle}>{item.name}</Text>
-            {item.filters.map((filter) => (
+            {item.filters.map((filter, i) => (
               <TouchableOpacity
+                key={i}
                 style={styles.filter}
                 onPress={() => {
                   filter.behaviour();
@@ -64,7 +71,7 @@ const Filters = ({
                 <Text style={styles.filterText}>{filter.name}</Text>
               </TouchableOpacity>
             ))}
-          </View>
+          </SafeAreaView>
         )}
         keyExtractor={(_, index) => index.toString()}
       />

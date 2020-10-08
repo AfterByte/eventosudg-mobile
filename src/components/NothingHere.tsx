@@ -1,17 +1,26 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { SvgProps } from 'react-native-svg';
 // Assets
 import EmptyLogo from '../assets/svg/undraw_Note_list_re_r4u9_Red.svg';
 
 type NothingHereProps = {
   message: string | JSX.Element;
+  mainMessage?: string | JSX.Element;
+  Image?: React.FC<SvgProps>;
+  imageSize?: number;
 };
 
-const NothingHere = ({ message }: NothingHereProps) => {
+const NothingHere = ({
+  mainMessage = '¡Aún no hay nada aquí!',
+  message,
+  Image = EmptyLogo,
+  imageSize = 300,
+}: NothingHereProps) => {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <EmptyLogo width={300} height={300} />
-      <Text style={styles.text}>¡Aún no hay nada aquí!</Text>
+      <Image width={imageSize} height={imageSize} />
+      <Text style={styles.text}>{mainMessage}</Text>
       {typeof message === 'string' ? (
         <Text style={styles.message}>{message}</Text>
       ) : (

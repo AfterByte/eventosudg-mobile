@@ -10,10 +10,10 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 
 type HeaderProps = {
   title: String;
-  isSubPage: boolean;
+  isSubPage?: boolean;
 };
 
-const Header = ({ title, isSubPage }: HeaderProps) => {
+const Header = ({ title, isSubPage = false }: HeaderProps) => {
   const navigation = useNavigation();
 
   const toggleDrawer = () => {
@@ -32,7 +32,10 @@ const Header = ({ title, isSubPage }: HeaderProps) => {
         }
       />
       <View style={styles.icons}>
-        <TouchableOpacity onPress={!isSubPage ? () => toggleDrawer : () => navigation.goBack()}>
+        <TouchableOpacity
+          onPress={
+            !isSubPage ? () => toggleDrawer() : () => navigation.goBack()
+          }>
           <Icon
             style={{ height: 40 }}
             name={isSubPage ? 'arrow-left' : 'menu'}

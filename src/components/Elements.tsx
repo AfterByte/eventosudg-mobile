@@ -1,13 +1,16 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useState } from 'react';
 import {
   View,
   StyleSheet,
   ImageBackground,
   ImageSourcePropType,
   Image,
+  TouchableOpacity,
 } from 'react-native';
+import { TextInput } from 'react-native-gesture-handler';
 // Icons import
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import FeatherIcon from 'react-native-vector-icons/Feather';
 // Helper imports
 import calculateShadow from '../helpers/shadowGenerator';
 
@@ -107,6 +110,36 @@ export const PictureFrame = ({
         <Icon name={'image-outline'} color={'#445068'} size={size * 0.8} />
       )}
     </View>
+  );
+};
+
+type SearchBoxProps = {
+  search(phrase: string): void | Promise<void>;
+};
+
+export const SearchBox = ({ search }: SearchBoxProps) => {
+  const [phrase, setPhrase] = useState('');
+
+  return (
+    <Card
+      style={{
+        flexDirection: 'row',
+        borderRadius: 16,
+        margin: 15,
+        paddingHorizontal: 8,
+      }}>
+      <TextInput
+        style={{ flex: 1 }}
+        onChangeText={(text) => {
+          setPhrase(text);
+        }}
+      />
+      <TouchableOpacity
+        style={{ alignSelf: 'center' }}
+        onPress={() => search(phrase)}>
+        <FeatherIcon name="search" size={20} color={'#445068'} />
+      </TouchableOpacity>
+    </Card>
   );
 };
 

@@ -26,6 +26,12 @@ const CustomDrawer = (
 ) => {
   const { signout } = useContext(AuthContext) as AuthProviderPayload;
 
+  const newState = { ...props.state };
+  const exclude = ['EventDetails'];
+  newState.routes = newState.routes.filter(
+    (item) => exclude.indexOf(item.name) === -1,
+  );
+
   const signOut = async () => {
     try {
       await signout();
@@ -57,6 +63,7 @@ const CustomDrawer = (
       <ScrollView>
         <DrawerItemList
           {...props}
+          state={newState}
           itemStyle={styles.item}
           labelStyle={styles.itemText}
           activeBackgroundColor="white"

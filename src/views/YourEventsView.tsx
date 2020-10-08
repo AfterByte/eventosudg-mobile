@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, FlatList, StyleSheet, SafeAreaView, Text } from 'react-native';
+import { FlatList, SafeAreaView } from 'react-native';
 // Custom component imports
 import Header from '../components/Header';
 import EventCard from '../components/EventCard';
@@ -30,17 +30,3 @@ const YourEventsView = () => {
 };
 
 export default YourEventsView;
-
-const styles = StyleSheet.create({
-  categories: {
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  text: {
-    fontSize: 18,
-    color: '#445068',
-    fontWeight: 'bold',
-    margin: 10,
-    marginTop: 20,
-  },
-});
