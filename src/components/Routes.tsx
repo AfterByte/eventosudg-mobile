@@ -21,15 +21,13 @@ import SearchView from '../views/SearchView';
 const Stack = createStackNavigator();
 const AuthNavigator = () => {
   return (
-    <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName="SignIn"
-        screenOptions={{
-          headerShown: false,
-        }}>
-        <Stack.Screen name="SignIn" component={LoginView} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Stack.Navigator
+      initialRouteName="SignIn"
+      screenOptions={{
+        headerShown: false,
+      }}>
+      <Stack.Screen name="SignIn" component={LoginView} />
+    </Stack.Navigator>
   );
 };
 
