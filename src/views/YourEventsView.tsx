@@ -13,13 +13,14 @@ import { events } from '../helpers/mockdata';
 const YourEventsView = () => {
   return events.length > 0 ? (
     <SafeAreaView style={[generalStyles.container]}>
-      <Header title="Tus eventos" />
-      <Filter />
+      <Header title="Tus eventos"/>
       <FlatList
         data={events}
         renderItem={({ item }) => <EventCard event={item} />}
         keyExtractor={(_, index) => index.toString()}
+        style={{marginTop:30}}
       />
+      <Filter />
     </SafeAreaView>
   ) : (
     <SafeAreaView style={generalStyles.container}>

@@ -83,7 +83,7 @@ const Filter = () => {
   const [showFilters, setShowFilters] = useState(false);
 
   return (
-    <View style={{ flexDirection: 'row-reverse', marginTop: 8 }}>
+    <View style={{ flexDirection: 'row-reverse', marginTop: 8, position:'absolute', top:100, right:0 }}>
       {showFilters ? <Filters /> : null}
       <TouchableOpacity
         onPress={() => {
@@ -93,7 +93,7 @@ const Filter = () => {
           name="filter-variant"
           size={26}
           color={'#445068'}
-          style={{ marginRight: 16, marginBottom: 10 }}
+          style={{ marginRight: 16, marginBottom: 10}}
         />
       </TouchableOpacity>
     </View>
@@ -104,7 +104,7 @@ export default Filter;
 const styles = StyleSheet.create({
   card: {
     position: 'absolute',
-    marginTop: 30,
+    marginTop:30,
     marginRight: 16,
     paddingVertical: 8,
   },

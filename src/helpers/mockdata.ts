@@ -41,7 +41,7 @@ export const events: Event[] = [
     capacity: 20,
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque lacinia est quis eros blandit elementum. Sed luctus augue id est rutrum malesuada. Praesent facilisis bibendum augue non vulputate. Morbi venenatis elit at tortor ullamcorper placerat. Aliquam mattis magna nec ex blandit vehicula.',
     organizer: 'Dios',
-    status: 'Disponible',
+    status: 'Finalizado',
     date: moment('20201031', 'YYYYMMDD').toDate(),
     maxCapacity: 31,
     guests: ["Random dude 1","Random dude 2", "Random dude 3", "Random dude 4"],
@@ -104,5 +104,7 @@ export const events: Event[] = [
     status: 'Disponible',
     date: moment('20201031', 'YYYYMMDD').toDate(),
     maxCapacity: 31,
+    guests: ["Random dude 1","Random dude 2", "Random dude 3", "Random dude 4"],
+    location: "Auditorio principal"
   },
 ];

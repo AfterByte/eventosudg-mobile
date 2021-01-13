@@ -21,7 +21,9 @@ export default function ImageContainer(props:props) {
         shape={'square'}
         size={180}
       />
-      <View style={styles.statusContainer}>
+      <View style={[styles.statusContainer, props.status === "Disponible"
+                                            ? styles.colorStatusAvailable
+                                            : styles.colorStatusNotAvailable]}>
         <Text style={styles.statusText}>{props.status}</Text>
       </View>
     </View>
@@ -45,10 +47,15 @@ const styles = StyleSheet.create({
     fontWeight: "500"
   },
   statusContainer: {
-    backgroundColor: "#63ACAA",
     paddingVertical: 4,
     paddingHorizontal: 20,
     borderRadius: 10,
     marginTop: -30
-  }
+  },
+  colorStatusAvailable: {
+    backgroundColor: '#63ACAA'
+  },
+  colorStatusNotAvailable: {
+    backgroundColor: '#445068'
+  },
 });

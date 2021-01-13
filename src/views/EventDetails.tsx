@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { View, Text, StyleSheet, Dimensions } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Header from '../components/Header';
@@ -18,11 +18,19 @@ export interface Id {
 
 export default function EventDetails({ route }: any) {
   const { eventID }: Id = route.params;
-  const [event, setEvent] = React.useState<Event>(events[eventID]);
+  const [event, setEvent] = useState<Event>(events[eventID]);
 
   useMemo(() => {
     setEvent(events[eventID]);
   }, [eventID]);
+
+  const statusCheck = () => {
+    if(event.status === "Disponible"){
+      return true;
+    }else{
+      return false;
+    }
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -56,11 +64,17 @@ export default function EventDetails({ route }: any) {
           ))}
         </View>
       </ScrollView>
-      <TouchableOpacity style={styles.buttonContainer}>
-        <View style={styles.button}>
-          <Text style={styles.buttonText}>Inscribirme</Text>
+      
+      {/* Button */}
+      <TouchableOpacity style={styles.buttonContainer} disabled={statusCheck() ? false : true}>
+        <View style={[styles.button, statusCheck() 
+                                      ? styles.colorButtonAvailable 
+                                      : styles.colorButtonNotAvailable]}>
+          <Text style={styles.buttonText}>{statusCheck() ? "Inscribirme" : "No disponible"}
+          </Text>
         </View>
       </TouchableOpacity>
+    
     </SafeAreaView>
   );
 }
@@ -129,12 +143,17 @@ const styles = StyleSheet.create({
   },
   button: {
     marginTop: 10,
-    backgroundColor: '#63ACAA',
     paddingTop: 10,
     paddingBottom: 10,
     borderRadius: 15,
     alignItems: 'center',
     marginHorizontal: 100,
+  },
+  colorButtonAvailable: {
+    backgroundColor: '#63ACAA'
+  },
+  colorButtonNotAvailable: {
+    backgroundColor: '#445068'
   },
   buttonText: {
     color: 'white',
